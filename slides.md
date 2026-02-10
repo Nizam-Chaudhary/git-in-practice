@@ -109,6 +109,27 @@ git add .
 
 ---
 
+# Configuration
+
+Set your identity before you start committing.
+
+### Identity (`git config`)
+
+```bash
+# Set globally (all projects)
+git config --global user.name "John Doe"
+git config --global user.email "john@example.com"
+
+# Set locally (current project only)
+git config user.name "John Doe"
+git config user.email "john@example.com"
+
+# Check your configuration
+git config --list
+```
+
+---
+
 # Committing
 
 Saving the snapshot to history.
@@ -276,9 +297,17 @@ Modern GitHub requires **SSH Keys** or **Personal Access Tokens (PAT)**. Passwor
 # Add a remote named 'origin'
 git remote add origin https://github.com/user/repo.git
 
-# Verify
+# Show remotes
 git remote -v
 
+# Rename a remote
+git remote rename origin destination
+
+# Remove a remote
+git remote remove destination
+
+# Change remote URL
+git remote set-url origin https://github.com/user/new-repo.git
 ```
 
 ---
