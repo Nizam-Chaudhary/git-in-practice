@@ -301,26 +301,13 @@ Parallel Development
 Branches allow you to work on features isolated from the main code.
 
 ```bash
-# List branches
-git branch
-
-# Create a new branch
-git branch feature-login
-
-# Switch to a branch
-git switch feature-login
-# OR
-git checkout feature-login
-
-# Create AND switch
-git checkout -b feature-login
-
-# Delete a branch (safe)
-git branch -d feature-login
-
-# Delete a branch (force - carefully!)
-git branch -D feature-login
-
+git branch                               # List branches
+git branch feature-login                 # Create a new branch
+git switch feature-login                 # Switch to a branch
+git checkout feature-login               # Switch to a branch (legacy)
+git checkout -b feature-login            # Create AND switch
+git branch -d feature-login              # Delete a branch (safe)
+git branch -D feature-login              # Delete a branch (force - carefully!)
 ```
 
 ---
@@ -346,21 +333,13 @@ Modern GitHub requires **SSH Keys** or **Personal Access Tokens (PAT)**. Passwor
 ### Linking Remote
 
 ```bash
-# Add a remote named 'origin'
-git remote add origin https://github.com/user/repo.git
-
-# Show remotes
-git remote -v
-
-# Rename a remote
-git remote rename origin destination
-
-# Remove a remote
-git remote remove destination
-
-# Change remote URL
-git remote set-url origin https://github.com/user/new-repo.git
+git remote add origin https://github.com/user/repo.git         # Add a remote named 'origin'
+git remote -v                                                  # Show remotes
+git remote rename origin destination                           # Rename a remote
+git remote remove destination                                  # Remove a remote
+git remote set-url origin https://github.com/user/new-repo.git # Change remote URL
 ```
+
 
 ---
 
