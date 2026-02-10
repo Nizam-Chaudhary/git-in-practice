@@ -1,0 +1,9 @@
+{
+  "editor.tabSize": 4,
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "[markdown]": {
+    "editor.defaultFormatter": "antfu.slidev"
+  }
+}
