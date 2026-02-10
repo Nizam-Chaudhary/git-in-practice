@@ -75,7 +75,7 @@ Understanding how Git tracks files.
 graph TD
     A[Working Directory] -- git add --> B[Staging Area]
     B -- git commit --> C[Repository]
-    C -- git checkout --> A
+    C -- git restore --> A
 
 ```
 
@@ -104,6 +104,9 @@ git add filename.txt
 
 # Stage all changes (new, modified, deleted)
 git add .
+
+# Interactive staging (Review changes chunk by chunk)
+git add -p
 
 ```
 
@@ -191,6 +194,29 @@ layout: section
 
 ---
 
+# HEAD & Reset
+
+### What is HEAD?
+
+`HEAD` is a pointer to the current commit you are viewing. Usually, it points to the tip of your current branch.
+
+### Git Reset
+
+Move the current branch backward in history.
+
+```bash
+# Soft Reset: Move HEAD back, keep changes staged
+git reset --soft HEAD~1
+
+# Mixed Reset (Default): Move HEAD back, keep changes unstaged
+git reset HEAD~1
+
+# Hard Reset: Move HEAD back, DESTROY changes (Dangerous!)
+git reset --hard HEAD~1
+```
+
+---
+
 # Unstaging & Restoring
 
 ### Unstage Changes
@@ -216,6 +242,26 @@ git restore <file>
 git checkout -- <file>
 
 ```
+
+---
+
+# Reverting Commits
+
+Safely undoing history that has already been shared.
+
+### `git revert`
+
+Creates a **new commit** that is the exact opposite of an existing one.
+
+```bash
+# Undo the changes introduced by the last commit
+git revert HEAD
+
+# Undo a specific commit by hash
+git revert <commit-hash>
+```
+
+> **Why?** Unlike `git reset`, this doesn't rewrite history, making it safe for public branches.
 
 ---
 
@@ -268,6 +314,12 @@ git checkout feature-login
 
 # Create AND switch
 git checkout -b feature-login
+
+# Delete a branch (safe)
+git branch -d feature-login
+
+# Delete a branch (force - carefully!)
+git branch -D feature-login
 
 ```
 
@@ -398,6 +450,17 @@ gitGraph
 **Rebase:**
 Moves the feature commits to be played _after_ the latest main commit.
 
+```mermaid
+gitGraph
+   commit
+   branch feature
+   commit
+   checkout main
+   commit
+   checkout feature
+   merge main
+```
+
 </div>
 
 ---
@@ -476,3 +539,31 @@ git worktree remove ../new-folder-name
 ```
 
 - Useful for fixing a hot-fix bug while in the middle of a massive feature refactor.
+
+---
+
+# Surgical Tools
+
+Precision Git operations.
+
+### Cherry Pick
+
+Apply a specific commit from one branch to another without merging the whole branch.
+
+```bash
+git cherry-pick <commit-hash>
+```
+
+### Bisect
+
+Find the commit that introduced a bug using binary search.
+
+```bash
+git bisect start
+git bisect bad            # Current version is broken
+git bisect good <commit>  # This old version worked
+# Git checks out a middle commit. You test it.
+git bisect good/bad       # Tell Git the result
+# Repeat until the culprit is found.
+git bisect reset
+```
